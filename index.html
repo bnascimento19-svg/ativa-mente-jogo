@@ -7,164 +7,205 @@
 <!-- Google Fonts Atualizado -->
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Nunito:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  body {
-    font-family: 'Nunito', Arial, sans-serif;
-    background: linear-gradient(135deg, #a1c4fd, #c2e9fb 80%);
-    margin: 0; padding: 0; color: #333;
-    display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
-    transition: background 2s;
-    overflow-x: hidden;
-  }
-  .container {
-    background: rgba(255,255,255,0.96);
-    border-radius: 20px;
-    padding: 24px 24px 32px 24px;
-    box-shadow: 0 8px 28px rgba(0,0,0,0.17);
-    max-width: 650px;
-    width: 96%;
-    text-align: center;
-    margin: 30px auto 24px auto;
-    position: relative;
-    transition: background 0.7s;
-  }
-  h1 {
-    font-family: 'Baloo 2', cursive;
-    font-size: 2.5rem;
-    color: #20679d;
-    user-select: none;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-  }
-  #mascote {
-    width: 140px; height: 140px; margin: 0 auto 18px auto;
-    position: relative; cursor:pointer;
-    filter: drop-shadow(0 4px 12px #7aa);
-    transition: filter 0.4s;
-  }
-  #mascote img {
-    width: 100%; height: auto;
-    user-select:none; transition: transform 0.35s; z-index:2; position:relative;
-  }
-  #mascote:hover img { animation: mascoteWiggle 1.1s;}
-  @keyframes mascoteWiggle {
-    0%, 100% { transform: rotate(0);}
-    14% { transform: rotate(-8deg);}
-    28% { transform: rotate(7deg);}
-    46% { transform: rotate(-9deg);}
-    63% { transform: rotate(8deg);}
-    85% { transform: rotate(-6deg);}
-  }
-  .mascote-jump { animation: mascoteJump 0.6s; }
-  @keyframes mascoteJump {
-    0% { transform: translateY(0);}
-    30% { transform: translateY(-29px);}
-    80% { transform: translateY(2px);}
-    100% { transform: translateY(0);}
-  }
-  .mascote-tail { animation: mascoteTail 1s alternate 2;}
-  @keyframes mascoteTail {
-    0%{ filter: brightness(1);}
-    50%{ filter: brightness(1.4);}
-    100%{ filter: brightness(1);}
-  }
-  .mascote-sit { animation: mascoteSit 1s forwards;}
-  @keyframes mascoteSit {
-    0%{transform: scale(1) rotate(0);}
-    80%{transform: scale(0.89) rotate(-9deg);}
-    100%{transform: scale(0.95) rotate(-7deg);}
-  }
-  .menu-btn, #menuButtons button, .options button, #quizArea button, #tipsArea button, #factsArea button, #gameArea button {
-    background: linear-gradient(90deg,#28c5e3 60%,#50e0b9 100%);
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    border-radius:14px;
-    margin: 10px 8px 10px 0;
-    padding: 15px 28px;
-    font-size: 1.12rem;
-    font-family: 'Nunito', Arial, sans-serif;
-    box-shadow:0 2px 10px rgba(44,154,226,0.09);
-    transition: transform .18s, box-shadow .20s, filter .16s, background .32s;
-    cursor: pointer; outline: none; position: relative; overflow: hidden;
-  }
-  .menu-btn:hover, #menuButtons button:hover, .options button:hover {
-    filter: brightness(1.13);
-    background: linear-gradient(90deg,#50e0b9 35%,#388fff 100%);
-    transform: scale(1.07); box-shadow: 0 4px 18px 2px rgba(80,200,255,0.14);
-  }
-  .hidden{display:none;}
-  .question{ font-weight: 600; font-size: 1.2rem; margin-bottom: 15px;}
-  .green { background-color: #5cb85c; }
-  .yellow { background-color: #f0ad4e; }
-  .orange { background-color: #fd7e14; }
-  .red { background-color: #d9534f; }
-  #result {
-    margin-top: 18px;
-    font-size: 1.17rem;
-    font-weight: bold;
-    padding: 15px;
-    border-radius: 12px;
-    color: white;
-    background: #28b9e6;
-    transition:.4s;
-  }
-  #gameArea, #quizArea, #tipsArea, #factsArea {
-    margin-top: 28px;
-    text-align: center;
-    user-select:none;
-  }
-  #memoryGameBoard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  .memoryCard {
-    width: 70px;
-    height: 70px;
-    background-color: #0275d8;
-    color: white;
-    margin: 5px;
-    line-height: 70px;
-    font-size: 2rem;
-    cursor: pointer;
-    border-radius: 12px;
-    user-select: none;
-    transition:.3s;
-    position: relative;
-  }
-  .memoryCard.flipped, .memoryCard.matched {
-    background-color: #5cb85c; cursor: default;
-  }
-  .memoryCard.matched {
-    background-color: #d9534f;
-  }
-  .particle {
-    position: absolute;
-    width: 15px; height: 15px;
-    pointer-events: none;
-    opacity:.69;
-    border-radius: 50%;
-    animation: particleMove 1.2s forwards;
-    z-index:2;
-  }
-  @keyframes particleMove {
-    from { transform: scale(1) translateY(0);}
-    to { transform: scale(0.1) translateY(-75px);}
-  }
-  @media (max-width:500px) {
-    .container { padding: 9px 2vw; font-size:.98em;}
-    #mascote { width:95px; height:95px;}
-    h1{ font-size:2rem;}
-  }
+body {
+  font-family: 'Nunito', Arial, sans-serif;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb 80%);
+  margin: 0; padding: 0; color: #333;
+  display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
+  transition: background 2s;
+  overflow-x: hidden;
+}
+.container {
+  background: rgba(255,255,255,0.96);
+  border-radius: 20px;
+  padding: 24px 24px 32px 24px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.17);
+  max-width: 650px;
+  width: 96%;
+  text-align: center;
+  margin: 30px auto 24px auto;
+  position: relative;
+  transition: background 0.7s;
+}
+h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 2.5rem;
+  color: #20679d;
+  user-select: none;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+#mascote-area {
+  position: relative;
+  width: 170px;
+  margin: 0 auto 0 auto;
+}
+#mascote {
+  width: 140px; height: 140px; margin: 0 auto 10px auto;
+  position: relative; cursor:pointer;
+  filter: drop-shadow(0 4px 12px #7aa);
+  transition: filter 0.4s;
+  z-index:2;
+}
+#mascote img {
+  width: 100%; height: auto;
+  user-select:none; transition: transform 0.35s; z-index:2; position:relative;
+}
+#mascote:hover img { animation: mascoteWiggle 1.1s;}
+@keyframes mascoteWiggle {
+  0%, 100% { transform: rotate(0);}
+  14% { transform: rotate(-8deg);}
+  28% { transform: rotate(7deg);}
+  46% { transform: rotate(-9deg);}
+  63% { transform: rotate(8deg);}
+  85% { transform: rotate(-6deg);}
+}
+.mascote-jump { animation: mascoteJump 0.6s; }
+@keyframes mascoteJump {
+  0% { transform: translateY(0);}
+  30% { transform: translateY(-29px);}
+  80% { transform: translateY(2px);}
+  100% { transform: translateY(0);}
+}
+.mascote-tail { animation: mascoteTail 1s alternate 2;}
+@keyframes mascoteTail {
+  0%{ filter: brightness(1);}
+  50%{ filter: brightness(1.4);}
+  100%{ filter: brightness(1);}
+}
+.mascote-sit { animation: mascoteSit 1s forwards;}
+@keyframes mascoteSit {
+  0%{transform: scale(1) rotate(0);}
+  80%{transform: scale(0.89) rotate(-9deg);}
+  100%{transform: scale(0.95) rotate(-7deg);}
+}
+#mascote-bar {
+  width: 95%; background: #eaeaea; border-radius: 12px;
+  overflow: hidden; margin: 6px auto 0 auto; height: 18px;
+  box-shadow: 0 0 6px #8cc;
+}
+#mascote-bar-inner {
+  height: 100%; width: 90%;
+  background: linear-gradient(90deg,#5be884 10%, #32bcff 95%);
+  transition: width 0.8s, background 0.8s;
+  border-radius: 12px;
+}
+#mascote-bar-label {
+  font-size: 0.93rem; color:#20679d; font-weight: bold;
+  margin-top: 3px; user-select:none;
+}
+#mascote-balao {
+  position: absolute; left: 128px; top: 15px; min-width: 80px; padding: 9px 12px; background: #fffbe5;
+  border-radius: 12px; box-shadow:0 2px 7px rgba(50,180,200,0.11);
+  color:#334; font-size:1rem;
+  border: 1.5px solid #e4e2b1;
+  z-index: 4;
+  opacity: 0; transform: translateY(-15px);
+  pointer-events: none;
+  transition: opacity 0.7s, transform 0.6s;
+}
+#mascote-balao.on {
+  opacity: 1; transform: translateY(0);
+}
+.menu-btn, #menuButtons button, .options button, #quizArea button, #tipsArea button, #factsArea button, #gameArea button {
+  background: linear-gradient(90deg,#28c5e3 60%,#50e0b9 100%);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius:14px;
+  margin: 10px 8px 10px 0;
+  padding: 15px 28px;
+  font-size: 1.12rem;
+  font-family: 'Nunito', Arial, sans-serif;
+  box-shadow:0 2px 10px rgba(44,154,226,0.09);
+  transition: transform .18s, box-shadow .20s, filter .16s, background .32s;
+  cursor: pointer; outline: none; position: relative; overflow: hidden;
+}
+.menu-btn:hover, #menuButtons button:hover, .options button:hover {
+  filter: brightness(1.13);
+  background: linear-gradient(90deg,#50e0b9 35%,#388fff 100%);
+  transform: scale(1.07); box-shadow: 0 4px 18px 2px rgba(80,200,255,0.14);
+}
+.hidden{display:none;}
+.question{ font-weight: 600; font-size: 1.2rem; margin-bottom: 15px;}
+.green { background-color: #5cb85c; }
+.yellow { background-color: #f0ad4e; }
+.orange { background-color: #fd7e14; }
+.red { background-color: #d9534f; }
+#result {
+  margin-top: 18px;
+  font-size: 1.17rem;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+  background: #28b9e6;
+  transition:.4s;
+}
+#gameArea, #quizArea, #tipsArea, #factsArea {
+  margin-top: 28px;
+  text-align: center;
+  user-select:none;
+}
+#memoryGameBoard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 320px;
+  margin: 0 auto;
+}
+.memoryCard {
+  width: 70px;
+  height: 70px;
+  background-color: #0275d8;
+  color: white;
+  margin: 5px;
+  line-height: 70px;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 12px;
+  user-select: none;
+  transition:.3s;
+  position: relative;
+}
+.memoryCard.flipped, .memoryCard.matched {
+  background-color: #5cb85c; cursor: default;
+}
+.memoryCard.matched {
+  background-color: #d9534f;
+}
+.particle {
+  position: absolute;
+  width: 15px; height: 15px;
+  pointer-events: none;
+  opacity:.69;
+  border-radius: 50%;
+  animation: particleMove 1.2s forwards;
+  z-index:2;
+}
+@keyframes particleMove {
+  from { transform: scale(1) translateY(0);}
+  to { transform: scale(0.1) translateY(-75px);}
+}
+@media (max-width:500px) {
+  .container { padding: 9px 2vw; font-size:.98em;}
+  #mascote { width:95px; height:95px;}
+  h1{ font-size:2rem;}
+}
 </style>
 </head>
 <body>
   <div class="container">
     <h1>Ativa Mente</h1>
-    <div id="mascote" title="Clique em mim!" tabindex="0">
-      <img id="mascoteImg" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Mascote animado: cachorrinho feliz" />
+    <div id="mascote-area">
+      <div id="mascote" title="Clique em mim!" tabindex="0">
+        <img id="mascoteImg" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Mascote animado: cachorrinho feliz" />
+      </div>
+      <div id="mascote-bar">
+        <div id="mascote-bar-inner" style="width:90%"></div>
+      </div>
+      <div id="mascote-bar-label">Felicidade</div>
+      <div id="mascote-balao"></div>
     </div>
     <p id="mascoteText">Vamos começar pela avaliação inicial para conhecer seu perfil!</p>
     <div id="menuButtons">
@@ -185,10 +226,64 @@
     <div id="factsArea" class="hidden" style="text-align:left; max-height: 350px; overflow-y: auto; padding: 0 12px;"></div>
   </div>
 <script>
-// Mascote animado e partículas
+/* ==== Mascote inteligente tipo tamagotchi ==== */
+let mascoteFelicidade = 80; // de 0 a 100
+let mascoteFelicidadeMax = 100;
+let mascoteBar = null, mascoteBarInner = null, mascoteBalao = null;
+
+// Inicialização do mascote
+document.addEventListener("DOMContentLoaded", function() {
+  mascoteBar = document.getElementById("mascote-bar");
+  mascoteBarInner = document.getElementById("mascote-bar-inner");
+  mascoteBalao = document.getElementById("mascote-balao");
+  atualizarMascoteVisual();
+  setInterval(()=>{
+    mascoteFelicidade = Math.max(0, mascoteFelicidade-2);
+    atualizarMascoteVisual();
+    mascoteAutoMensagem();
+  }, 60000); // Diminui felicidade automaticamente
+});
+
+// Função para alimentar e dar carinho ao mascote
+function alimentarMascote(valor=6, motivo="") {
+  mascoteFelicidade = Math.min(mascoteFelicidadeMax, mascoteFelicidade+valor);
+  atualizarMascoteVisual();
+  mascoteFala(motivo || "Yay! Estou mais feliz!");
+}
+
 const mascoteImg = document.getElementById("mascoteImg");
 const mascoteDiv = document.getElementById("mascote");
 const mascoteText = document.getElementById("mascoteText");
+mascoteDiv.onclick = () => {
+  mascoteJump();
+  alimentarMascote(3, "Obrigado pelo carinho! ❤️");
+};
+// Mascote com estados e frases
+function atualizarMascoteVisual() {
+  if(!mascoteBarInner) return;
+  let pct = mascoteFelicidade/mascoteFelicidadeMax*100;
+  mascoteBarInner.style.width = pct+"%";
+  // Cor do humor
+  if(pct > 65) mascoteBarInner.style.background = "linear-gradient(90deg,#65e7ad,#37c4e7 90%)";
+  else if(pct > 30) mascoteBarInner.style.background = "linear-gradient(90deg,#f1e767,#fccb70 90%)";
+  else mascoteBarInner.style.background = "linear-gradient(90deg,#f89d9f,#e26363 90%)";
+  // Muda expressão
+  if(pct > 60) mascoteImg.style.filter = "grayscale(0) brightness(1)";
+  else if(pct > 30) mascoteImg.style.filter = "grayscale(0.25) brightness(0.95)";
+  else mascoteImg.style.filter = "grayscale(0.7) brightness(0.93)";
+}
+// Fala do mascote
+function mascoteFala(texto) {
+  mascoteBalao.textContent = texto;
+  mascoteBalao.classList.add("on");
+  setTimeout(()=>mascoteBalao.classList.remove("on"), 2500);
+}
+// Mensagens automáticas conforme humor
+function mascoteAutoMensagem() {
+  if(mascoteFelicidade === 0) mascoteFala("Estou me sentindo sozinho...");
+  else if(mascoteFelicidade < 25) mascoteFala("Preciso brincar!");
+  else if(mascoteFelicidade < 55) mascoteFala("Quer jogar comigo?");
+}
 function mascoteJump() {
   mascoteImg.classList.remove("mascote-tail","mascote-sit");
   mascoteImg.classList.add("mascote-jump");
@@ -218,10 +313,6 @@ function mascoteBark() {
 }
 let mascoteFuncoes = [mascoteBark, mascoteJump, mascoteTail, mascoteSit];
 let mascoteIndex = 0;
-mascoteDiv.onclick = () => {
-  mascoteFuncoes[mascoteIndex % mascoteFuncoes.length]();
-  mascoteIndex++;
-};
 function mascoteParticles(cor="#50e0b9"){
   for(let i=0;i<9;i++){
     let p=document.createElement('div');
@@ -233,496 +324,502 @@ function mascoteParticles(cor="#50e0b9"){
     setTimeout(()=>p.remove(),1300);
   }
 }
-  // Dados das perguntas das avaliações
   const tdahQuestions = [
-    { text: "Você se distrai com facilidade em atividades importantes?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
-    { text: "Fica inquieto(a) esperando por algo?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
-    { text: "Esquece compromissos e objetos do dia a dia facilmente?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
-    { text: "Tem dificuldade em terminar tarefas longas?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] },
-    { text: "Sente-se cheio(a) de energia boa parte do tempo?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] }
-  ];
+  { text: "Você se distrai com facilidade em atividades importantes?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
+  { text: "Fica inquieto(a) esperando por algo?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
+  { text: "Esquece compromissos e objetos do dia a dia facilmente?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
+  { text: "Tem dificuldade em terminar tarefas longas?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] },
+  { text: "Sente-se cheio(a) de energia boa parte do tempo?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] }
+];
 
-  const autismQuestions = [
-    { text: "Você tem dificuldades em manter contato visual?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
-    { text: "Prefere rotinas e se sente desconfortável com mudanças?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
-    { text: "Tem dificuldade em entender expressões faciais ou linguagem corporal?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] },
-    { text: "Gosta de interesses repetitivos ou restritos?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] },
-    { text: "Sente-se desconfortável com sons ou texturas específicas?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] }
-  ];
+const autismQuestions = [
+  { text: "Você tem dificuldades em manter contato visual?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
+  { text: "Prefere rotinas e se sente desconfortável com mudanças?", options: ["Quase nunca", "Às vezes", "Muitas vezes", "Sempre"] },
+  { text: "Tem dificuldade em entender expressões faciais ou linguagem corporal?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] },
+  { text: "Gosta de interesses repetitivos ou restritos?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] },
+  { text: "Sente-se desconfortável com sons ou texturas específicas?", options: ["Quase nunca", "À vezes", "Muitas vezes", "Sempre"] }
+];
 
-  const quizEducation = [
-    { question: "O que significa TDAH?", answer: "Transtorno do Déficit de Atenção com Hiperatividade" },
-    { question: "Quais são sintomas comuns do Autismo?", answer: "Dificuldades sociais, comportamento repetitivo e comunicação" },
-    { question: "Qual destas é uma estratégia para ajudar o foco no TDAH?", answer: "Estabelecer rotinas e pausas regulares" },
-    { question: "É verdade que pessoas com autismo têm interesses muito intensos?", answer: "Sim, isso é comum" },
-    { question: "TDAH e Autismo são a mesma coisa?", answer: "Não, são condições diferentes, embora possam coexistir" }
-  ];
+const quizEducation = [
+  { question: "O que significa TDAH?", answer: "Transtorno do Déficit de Atenção com Hiperatividade" },
+  { question: "Quais são sintomas comuns do Autismo?", answer: "Dificuldades sociais, comportamento repetitivo e comunicação" },
+  { question: "Qual destas é uma estratégia para ajudar o foco no TDAH?", answer: "Estabelecer rotinas e pausas regulares" },
+  { question: "É verdade que pessoas com autismo têm interesses muito intensos?", answer: "Sim, isso é comum" },
+  { question: "TDAH e Autismo são a mesma coisa?", answer: "Não, são condições diferentes, embora possam coexistir" }
+];
 
-  const factsCuriosos = [
-    { 
-      title: "TDAH não é apenas desatenção", 
-      text: "O TDAH envolve sintomas de desatenção, hiperatividade e impulsividade. Nem todas as pessoas apresentam todos os sintomas na mesma intensidade. (Fonte: Associação Brasileira do Déficit de Atenção)" 
-    },
-    { 
-      title: "Autismo é um espectro amplo", 
-      text: "O autismo varia muito entre as pessoas, envolvendo diferentes graus de necessidades de suporte. Também envolve diferenças sensoriais e na comunicação. (Fonte: Organização Mundial da Saúde)" 
-    },
-    { 
-      title: "Pessoas com TDAH podem apresentar hiperfoco", 
-      text: "Além da dificuldade de foco, é comum que pessoas com TDAH entrem em estados de hiperfoco intenso em atividades que gostam. (Fonte: National Institute of Mental Health)" 
-    },
-    { 
-      title: "Interesses intensos são comuns no autismo", 
-      text: "Brincar ou se dedicar a interesses restritos e intensos é parte frequente do espectro autista e pode ser uma força. (Fonte: Autism Speaks)" 
-    },
-    { 
-      title: "TDAH e autismo podem coexistir", 
-      text: "É possível que uma pessoa tenha TDAH e autismo ao mesmo tempo, o que requer abordagens cuidadosas no tratamento. (Fonte: Journal of Attention Disorders)" 
-    }
-  ];
+const factsCuriosos = [
+  { 
+    title: "TDAH não é apenas desatenção", 
+    text: "O TDAH envolve sintomas de desatenção, hiperatividade e impulsividade. Nem todas as pessoas apresentam todos os sintomas na mesma intensidade. (Fonte: Associação Brasileira do Déficit de Atenção)" 
+  },
+  { 
+    title: "Autismo é um espectro amplo", 
+    text: "O autismo varia muito entre as pessoas, envolvendo diferentes graus de necessidades de suporte. Também envolve diferenças sensoriais e na comunicação. (Fonte: Organização Mundial da Saúde)" 
+  },
+  { 
+    title: "Pessoas com TDAH podem apresentar hiperfoco", 
+    text: "Além da dificuldade de foco, é comum que pessoas com TDAH entrem em estados de hiperfoco intenso em atividades que gostam. (Fonte: National Institute of Mental Health)" 
+  },
+  { 
+    title: "Interesses intensos são comuns no autismo", 
+    text: "Brincar ou se dedicar a interesses restritos e intensos é parte frequente do espectro autista e pode ser uma força. (Fonte: Autism Speaks)" 
+  },
+  { 
+    title: "TDAH e autismo podem coexistir", 
+    text: "É possível que uma pessoa tenha TDAH e autismo ao mesmo tempo, o que requer abordagens cuidadosas no tratamento. (Fonte: Journal of Attention Disorders)" 
+  }
+];
 
-  // Variáveis globais avaliação
-  let tdahScore = 0;
-  let autismScore = 0;
-  let currentTdahQIndex = 0;
-  let currentAutismQIndex = 0;
-  let inTdahPhase = true;
+// Variáveis globais avaliação
+let tdahScore = 0;
+let autismScore = 0;
+let currentTdahQIndex = 0;
+let currentAutismQIndex = 0;
+let inTdahPhase = true;
 
-  // Elementos
-  const quizDiv = document.getElementById('quiz');
-  const resultDiv = document.getElementById('result');
-  // mascoteText está definido no bloco de mascote lá em cima
-  const menuButtons = document.getElementById('menuButtons');
-  const gameArea = document.getElementById('gameArea');
-  const quizArea = document.getElementById('quizArea');
-  const tipsArea = document.getElementById('tipsArea');
-  const factsArea = document.getElementById('factsArea');
+// Elementos
+const quizDiv = document.getElementById('quiz');
+const resultDiv = document.getElementById('result');
+const menuButtons = document.getElementById('menuButtons');
+const gameArea = document.getElementById('gameArea');
+const quizArea = document.getElementById('quizArea');
+const tipsArea = document.getElementById('tipsArea');
+const factsArea = document.getElementById('factsArea');
 
-  // Avaliação inicial
-  function startEvaluation() {
-    tdahScore = 0; autismScore = 0;
-    currentTdahQIndex = 0; currentAutismQIndex = 0;
-    inTdahPhase = true;
-    quizDiv.classList.remove('hidden');
-    quizArea.classList.add('hidden');
-    tipsArea.classList.add('hidden');
-    factsArea.classList.add('hidden');
-    resultDiv.innerHTML = '';
-    menuButtons.classList.add('hidden');
-    gameArea.innerHTML = '';
-    mascoteText.textContent = 'Vamos começar pela avaliação para conhecer seu perfil!';
+// Avaliação inicial
+function startEvaluation() {
+  tdahScore = 0; autismScore = 0;
+  currentTdahQIndex = 0; currentAutismQIndex = 0;
+  inTdahPhase = true;
+  quizDiv.classList.remove('hidden');
+  quizArea.classList.add('hidden');
+  tipsArea.classList.add('hidden');
+  factsArea.classList.add('hidden');
+  resultDiv.innerHTML = '';
+  menuButtons.classList.add('hidden');
+  gameArea.innerHTML = '';
+  mascoteText.textContent = 'Vamos começar pela avaliação para conhecer seu perfil!';
+  showTdahQuestion();
+}
+
+function showTdahQuestion() {
+  if(currentTdahQIndex >= tdahQuestions.length) {
+    inTdahPhase = false;
+    currentAutismQIndex = 0;
+    mascoteText.textContent = 'Agora algumas perguntas sobre Autismo.';
+    showAutismQuestion();
+    return;
+  }
+  const q = tdahQuestions[currentTdahQIndex];
+  showQuestion(q);
+}
+
+function showAutismQuestion() {
+  if(currentAutismQIndex >= autismQuestions.length) {
+    quizDiv.classList.add('hidden');
+    showEvaluationResult();
+    return;
+  }
+  const q = autismQuestions[currentAutismQIndex];
+  showQuestion(q);
+}
+
+function showQuestion(q) {
+  let optionsHtml = '';
+  for(let i=0; i<q.options.length; i++) {
+    optionsHtml += `<button class="${getColorClass(i)}" onclick="answerQuestion(${i})" aria-label="${q.options[i]}">${q.options[i]}</button>`;
+  }
+  quizDiv.innerHTML = `
+    <div class="question">${q.text}</div>
+    <div class="options">${optionsHtml}</div>
+  `;
+}
+
+function getColorClass(idx) {
+  switch(idx) {
+    case 0: return 'green';
+    case 1: return 'yellow';
+    case 2: return 'orange';
+    case 3: return 'red';
+    default: return 'green';
+  }
+}
+
+// Atualização para alimentar o mascote ao responder perguntas
+function answerQuestion(idx) {
+  let pontos = idx;
+  if(inTdahPhase) {
+    tdahScore += pontos;
+    currentTdahQIndex++;
     showTdahQuestion();
+    if(idx > 1) alimentarMascote(4, "Responder perguntas me deixa feliz!");
+  } else {
+    autismScore += pontos;
+    currentAutismQIndex++;
+    showAutismQuestion();
+    if(idx > 1) alimentarMascote(4, "Adoro suas respostas!");
   }
+}
 
-  function showTdahQuestion() {
-    if(currentTdahQIndex >= tdahQuestions.length) {
-      inTdahPhase = false;
-      currentAutismQIndex = 0;
-      mascoteText.textContent = 'Agora algumas perguntas sobre Autismo.';
-      showAutismQuestion();
-      return;
+function showEvaluationResult() {
+  let tdahLevel, autismLevel;
+  if(tdahScore <= 5) tdahLevel = "Baixo";
+  else if(tdahScore <= 10) tdahLevel = "Médio";
+  else tdahLevel = "Alto";
+  if(autismScore <= 5) autismLevel = "Baixo";
+  else if(autismScore <= 10) autismLevel = "Médio";
+  else autismLevel = "Alto";
+
+  let html = `
+    <h2>Resultados da Avaliação</h2>
+    <p><strong>TDAH:</strong> ${tdahLevel} (pontuação: ${tdahScore})</p>
+    <p><strong>Autismo:</strong> ${autismLevel} (pontuação: ${autismScore})</p>
+    <p>Esses resultados são indicativos e não substituem avaliação médica.</p>
+  `;
+  resultDiv.innerHTML = html;
+  resultDiv.style.backgroundColor = '#0275d8';
+  quizArea.classList.add('hidden');
+  tipsArea.classList.add('hidden');
+  factsArea.classList.add('hidden');
+  quizDiv.classList.add('hidden');
+  menuButtons.classList.remove('hidden');
+  mascoteText.textContent = 'Agora você pode escolher jogos, quiz educativo, dicas ou fatos curiosos!';
+}
+
+function goToMenu() {
+  gameArea.innerHTML = '';
+  quizArea.classList.add('hidden');
+  tipsArea.classList.add('hidden');
+  factsArea.classList.add('hidden');
+  resultDiv.innerHTML = '';
+  quizDiv.classList.add('hidden');
+  menuButtons.classList.remove('hidden');
+  mascoteText.textContent = 'Escolha o que quer fazer a seguir! Jogos, quiz, dicas ou fatos curiosos.';
+}
+  // 1: Jogo Atenção Rápida
+function startAttentionGame() {
+  gameArea.innerHTML = `
+    <p style="font-weight:bold;">Clique rápido no botão azul que vai aparecer e desaparecer!</p>
+    <button id="attButton" style="background:#0275d8; color:white; font-size:1.3rem; padding:15px 25px; border:none; border-radius:15px; cursor:pointer;">Clique aqui!</button>
+    <p id="attScore" style="font-weight:bold; margin-top:12px;">Pontos: 0</p>
+    <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
+  `;
+  let score = 0;
+  const btn = document.getElementById('attButton');
+  const scoreText = document.getElementById('attScore');
+  let visible = true;
+  let intervalId = setInterval(() => {
+    visible = !visible;
+    btn.style.display = visible ? 'inline-block' : 'none';
+  }, 1000);
+
+  btn.onclick = () => {
+    if(visible) {
+      score++;
+      scoreText.textContent = 'Pontos: ' + score;
     }
-    const q = tdahQuestions[currentTdahQIndex];
-    showQuestion(q);
-  }
+  };
 
-  function showAutismQuestion() {
-    if(currentAutismQIndex >= autismQuestions.length) {
-      quizDiv.classList.add('hidden');
-      showEvaluationResult();
-      return;
-    }
-    const q = autismQuestions[currentAutismQIndex];
-    showQuestion(q);
-  }
+  setTimeout(() => {
+    clearInterval(intervalId);
+    btn.style.display = 'none';
+    mascoteText.textContent = `Fim do jogo! Você marcou ${score} pontos.`;
+    if (score > 10) alimentarMascote(9, "Me diverti com sua atenção!");
+    else if (score > 5) alimentarMascote(5, "Adorei brincar rápido!");
+    else alimentarMascote(2, "Vamos praticar mais?");
+  }, 20000);
+}
 
-  function showQuestion(q) {
-    let optionsHtml = '';
-    for(let i=0; i<q.options.length; i++) {
-      optionsHtml += `<button class="${getColorClass(i)}" onclick="answerQuestion(${i})" aria-label="${q.options[i]}">${q.options[i]}</button>`;
-    }
-    quizDiv.innerHTML = `
-      <div class="question">${q.text}</div>
-      <div class="options">${optionsHtml}</div>
-    `;
-  }
+// 2: Memória Visual
+function startMemoryGame() {
+  const cards = ['🐶', '🐱', '🐰', '🐻', '🦊', '🐸', '🐼', '🐨'];
+  let gameCards = [...cards, ...cards];
+  gameCards = gameCards.sort(() => 0.5 - Math.random());
 
-  function getColorClass(idx) {
-    switch(idx) {
-      case 0: return 'green';
-      case 1: return 'yellow';
-      case 2: return 'orange';
-      case 3: return 'red';
-      default: return 'green';
-    }
-  }
+  gameArea.innerHTML = `<p style="font-weight:bold;">Clique nas cartas para encontrar os pares iguais.</p><div id="memoryGameBoard"></div><p id="memoryResult"></p>
+    <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
+  `;
 
-  function answerQuestion(idx) {
-    let pontos = idx;
-    if(inTdahPhase) {
-      tdahScore += pontos;
-      currentTdahQIndex++;
-      showTdahQuestion();
-    } else {
-      autismScore += pontos;
-      currentAutismQIndex++;
-      showAutismQuestion();
-    }
-  }
+  const board = document.getElementById('memoryGameBoard');
+  board.innerHTML = '';
+  let flippedCards = [];
+  let matchedPairs = 0;
 
-  function showEvaluationResult() {
-    let tdahLevel, autismLevel;
-    if(tdahScore <= 5) tdahLevel = "Baixo";
-    else if(tdahScore <= 10) tdahLevel = "Médio";
-    else tdahLevel = "Alto";
-    if(autismScore <= 5) autismLevel = "Baixo";
-    else if(autismScore <= 10) autismLevel = "Médio";
-    else autismLevel = "Alto";
-
-    let html = `
-      <h2>Resultados da Avaliação</h2>
-      <p><strong>TDAH:</strong> ${tdahLevel} (pontuação: ${tdahScore})</p>
-      <p><strong>Autismo:</strong> ${autismLevel} (pontuação: ${autismScore})</p>
-      <p>Esses resultados são indicativos e não substituem avaliação médica.</p>
-    `;
-    resultDiv.innerHTML = html;
-    resultDiv.style.backgroundColor = '#0275d8';
-    quizArea.classList.add('hidden');
-    tipsArea.classList.add('hidden');
-    factsArea.classList.add('hidden');
-    quizDiv.classList.add('hidden');
-    menuButtons.classList.remove('hidden');
-    mascoteText.textContent = 'Agora você pode escolher jogos, quiz educativo, dicas ou fatos curiosos!';
-  }
-
-  // Função para voltar ao menu
-  function goToMenu() {
-    gameArea.innerHTML = '';
-    quizArea.classList.add('hidden');
-    tipsArea.classList.add('hidden');
-    factsArea.classList.add('hidden');
-    resultDiv.innerHTML = '';
-    quizDiv.classList.add('hidden');
-    menuButtons.classList.remove('hidden');
-    mascoteText.textContent = 'Escolha o que quer fazer a seguir! Jogos, quiz, dicas ou fatos curiosos.';
-  }
-
-  // Jogos
-
-  // 1: Atenção Rápida
-  function startAttentionGame() {
-    gameArea.innerHTML = `
-      <p style="font-weight:bold;">Clique rápido no botão azul que vai aparecer e desaparecer!</p>
-      <button id="attButton" style="background:#0275d8; color:white; font-size:1.3rem; padding:15px 25px; border:none; border-radius:15px; cursor:pointer;">Clique aqui!</button>
-      <p id="attScore" style="font-weight:bold; margin-top:12px;">Pontos: 0</p>
-      <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
-    `;
-    let score = 0;
-    const btn = document.getElementById('attButton');
-    const scoreText = document.getElementById('attScore');
-
-    let visible = true;
-    let intervalId = setInterval(() => {
-      visible = !visible;
-      btn.style.display = visible ? 'inline-block' : 'none';
-    }, 1000);
-
-    btn.onclick = () => {
-      if(visible) {
-        score++;
-        scoreText.textContent = 'Pontos: ' + score;
+  gameCards.forEach((emoji, index) => {
+    const card = document.createElement('div');
+    card.classList.add('memoryCard');
+    card.dataset.emoji = emoji;
+    card.dataset.index = index;
+    card.innerHTML = '❓';
+    card.onclick = () => {
+      if(flippedCards.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
+        card.classList.add('flipped');
+        card.textContent = emoji;
+        flippedCards.push(card);
+        if(flippedCards.length === 2) {
+          setTimeout(() => {
+            checkMatch();
+          }, 900);
+        }
       }
     };
+    board.appendChild(card);
+  });
 
-    setTimeout(() => {
-      clearInterval(intervalId);
-      btn.style.display = 'none';
-      mascoteText.textContent = `Fim do jogo! Você marcou ${score} pontos.`;
-    }, 20000);
-  }
-
-  // 2: Memória Visual
-  function startMemoryGame() {
-    const cards = ['🐶', '🐱', '🐰', '🐻', '🦊', '🐸', '🐼', '🐨'];
-    let gameCards = [...cards, ...cards];
-    gameCards = gameCards.sort(() => 0.5 - Math.random());
-
-    gameArea.innerHTML = `<p style="font-weight:bold;">Clique nas cartas para encontrar os pares iguais.</p><div id="memoryGameBoard"></div><p id="memoryResult"></p>
-      <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
-    `;
-
-    const board = document.getElementById('memoryGameBoard');
-    board.innerHTML = '';
-    let flippedCards = [];
-    let matchedPairs = 0;
-
-    gameCards.forEach((emoji, index) => {
-      const card = document.createElement('div');
-      card.classList.add('memoryCard');
-      card.dataset.emoji = emoji;
-      card.dataset.index = index;
-      card.innerHTML = '❓';
-      card.onclick = () => {
-        if(flippedCards.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
-          card.classList.add('flipped');
-          card.textContent = emoji;
-          flippedCards.push(card);
-          if(flippedCards.length === 2) {
-            setTimeout(() => {
-              checkMatch();
-            }, 900);
-          }
-        }
-      };
-      board.appendChild(card);
-    });
-
-    function checkMatch() {
-      const [card1, card2] = flippedCards;
-      if(card1.dataset.emoji === card2.dataset.emoji) {
-        card1.classList.add('matched');
-        card2.classList.add('matched');
-        matchedPairs++;
-        if(matchedPairs === cards.length) {
-          document.getElementById('memoryResult').textContent = 'Parabéns! Você encontrou todos os pares!';
-          mascoteText.textContent = 'Você mandou muito bem na memória! 🎉';
-        }
-      } else {
-        card1.classList.remove('flipped');
-        card2.classList.remove('flipped');
-        card1.textContent = '❓';
-        card2.textContent = '❓';
+  function checkMatch() {
+    const [card1, card2] = flippedCards;
+    if(card1.dataset.emoji === card2.dataset.emoji) {
+      card1.classList.add('matched');
+      card2.classList.add('matched');
+      matchedPairs++;
+      if(matchedPairs === cards.length) {
+        document.getElementById('memoryResult').textContent = 'Parabéns! Você encontrou todos os pares!';
+        mascoteText.textContent = 'Você mandou muito bem na memória! 🎉';
+        alimentarMascote(10, "Amei brincar de memória!");
       }
-      flippedCards = [];
+    } else {
+      card1.classList.remove('flipped');
+      card2.classList.remove('flipped');
+      card1.textContent = '❓';
+      card2.textContent = '❓';
     }
+    flippedCards = [];
   }
+}
 
-  // 3: Sequência Rápida - clique nos números de 1 a 9 rápido
-  function startSequenceGame() {
-    gameArea.innerHTML = `
-      <p style="font-weight:bold;">Clique nos números na ordem crescente o mais rápido possível!</p>
-      <div id="sequenceBoard" style="display:flex; flex-wrap: wrap; max-width: 210px; margin: 0 auto; justify-content:center;"></div>
-      <p id="seqTimer">Tempo: 0.0s</p>
-      <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
-    `;
+// 3: Sequência Rápida
+function startSequenceGame() {
+  gameArea.innerHTML = `
+    <p style="font-weight:bold;">Clique nos números na ordem crescente o mais rápido possível!</p>
+    <div id="sequenceBoard" style="display:flex; flex-wrap: wrap; max-width: 210px; margin: 0 auto; justify-content:center;"></div>
+    <p id="seqTimer">Tempo: 0.0s</p>
+    <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
+  `;
 
-    const board = document.getElementById('sequenceBoard');
-    let numbers = [1,2,3,4,5,6,7,8,9];
-    numbers = numbers.sort(() => 0.5 - Math.random());
+  const board = document.getElementById('sequenceBoard');
+  let numbers = [1,2,3,4,5,6,7,8,9];
+  numbers = numbers.sort(() => 0.5 - Math.random());
 
-    numbers.forEach(num => {
-      const btn = document.createElement('button');
-      btn.textContent = num;
-      btn.style.margin = "5px";
-      btn.style.width = "60px";
-      btn.style.height = "60px";
-      btn.style.fontSize = "1.5rem";
-      btn.style.borderRadius = "12px";
-      btn.style.cursor = "pointer";
-      btn.onclick = () => handleSequenceClick(num, btn);
-      board.appendChild(btn);
-    });
+  numbers.forEach(num => {
+    const btn = document.createElement('button');
+    btn.textContent = num;
+    btn.style.margin = "5px";
+    btn.style.width = "60px";
+    btn.style.height = "60px";
+    btn.style.fontSize = "1.5rem";
+    btn.style.borderRadius = "12px";
+    btn.style.cursor = "pointer";
+    btn.onclick = () => handleSequenceClick(num, btn);
+    board.appendChild(btn);
+  });
 
-    let nextNumber = 1;
-    let startTime = performance.now();
-    let finished = false;
-    const timerText = document.getElementById('seqTimer');
+  let nextNumber = 1;
+  let startTime = performance.now();
+  let finished = false;
+  const timerText = document.getElementById('seqTimer');
 
-    const timerInterval = setInterval(() => {
-      if(finished) {
+  const timerInterval = setInterval(() => {
+    if(finished) {
+      clearInterval(timerInterval);
+      return;
+    }
+    let now = performance.now();
+    timerText.textContent = "Tempo: " + ((now - startTime)/1000).toFixed(1) + "s";
+  }, 100);
+
+  function handleSequenceClick(numClicked, btn) {
+    if(numClicked === nextNumber && !finished) {
+      btn.disabled = true;
+      btn.style.backgroundColor = '#5cb85c';
+      if(nextNumber === 9) {
+        finished = true;
+        let totalTime = (performance.now() - startTime) / 1000;
+        mascoteText.textContent = `Parabéns! Você completou em ${totalTime.toFixed(2)} segundos.`;
+        if (totalTime < 12) alimentarMascote(9, "Excelente sequência!");
+        else if (totalTime < 20) alimentarMascote(6, "Ótimo tempo!");
+        else alimentarMascote(3, "Legal! Siga praticando.");
         clearInterval(timerInterval);
         return;
       }
-      let now = performance.now();
-      timerText.textContent = "Tempo: " + ((now - startTime)/1000).toFixed(1) + "s";
-    }, 100);
-
-    function handleSequenceClick(numClicked, btn) {
-      if(numClicked === nextNumber && !finished) {
-        btn.disabled = true;
-        btn.style.backgroundColor = '#5cb85c';
-        if(nextNumber === 9) {
-          finished = true;
-          let totalTime = (performance.now() - startTime) / 1000;
-          mascoteText.textContent = `Parabéns! Você completou em ${totalTime.toFixed(2)} segundos.`;
-          clearInterval(timerInterval);
-          return;
-        }
-        nextNumber++;
-      }
+      nextNumber++;
     }
   }
+}
 
-  // 4: Reagir a Cores - clicar onde o botão muda de cor
-  function startColorReactionGame() {
-    gameArea.innerHTML = `
-      <p style="font-weight:bold;">Clique no botão que muda de cor o mais rápido possível!</p>
-      <button id="colorBtn" style="background:red; color:white; font-size:1.4rem; padding:20px 35px; border:none; border-radius:15px; cursor:pointer;">Clique!</button>
-      <p id="colorScore" style="font-weight:bold; margin-top:15px;">Cliques: 0</p>
-      <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
+// 4: Reagir a Cores
+function startColorReactionGame() {
+  gameArea.innerHTML = `
+    <p style="font-weight:bold;">Clique no botão que muda de cor o mais rápido possível!</p>
+    <button id="colorBtn" style="background:red; color:white; font-size:1.4rem; padding:20px 35px; border:none; border-radius:15px; cursor:pointer;">Clique!</button>
+    <p id="colorScore" style="font-weight:bold; margin-top:15px;">Cliques: 0</p>
+    <button onclick="goToMenu()" style="margin-top:20px; background:#5bc0de;">Voltar ao Menu</button>
+  `;
+
+  const btn = document.getElementById('colorBtn');
+  const scoreText = document.getElementById('colorScore');
+  let clicks = 0;
+  let colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
+  let interval = setInterval(changeColor, 1000);
+
+  btn.onclick = () => {
+    clicks++;
+    scoreText.textContent = 'Cliques: ' + clicks;
+  };
+
+  function changeColor() {
+    let newColor = colors[Math.floor(Math.random() * colors.length)];
+    btn.style.backgroundColor = newColor;
+  }
+
+  setTimeout(() => {
+    clearInterval(interval);
+    btn.disabled = true;
+    mascoteText.textContent = `Jogo finalizado! Você clicou ${clicks} vezes.`;
+    if (clicks > 16) alimentarMascote(10, "Wow, que rapidez!");
+    else if (clicks > 10) alimentarMascote(7, "Muito bem!");
+    else alimentarMascote(4, "Legal, vamos brincar mais?");
+  }, 20000);
+}
+
+// Quiz educativo
+function showQuiz() {
+  quizArea.classList.remove('hidden');
+  gameArea.innerHTML = '';
+  tipsArea.classList.add('hidden');
+  factsArea.classList.add('hidden');
+  quizDiv.classList.add('hidden');
+  menuButtons.classList.add('hidden');
+  resultDiv.innerHTML = '';
+
+  let index = 0;
+  let score = 0;
+
+  function showNext() {
+    if(index >= quizEducation.length) {
+      quizArea.innerHTML = `<h3>Você acertou ${score} de ${quizEducation.length} perguntas!</h3>
+        <button onclick="goToMenu()">Voltar ao Menu</button>`;
+      mascoteText.textContent = 'Espero que você tenha aprendido bastante! 📚';
+      if (score === quizEducation.length) alimentarMascote(10, "Você é um(a) expert!");
+      else if (score >= 3) alimentarMascote(7, "Você está indo muito bem!");
+      else alimentarMascote(4, "Continue praticando!");
+      return;
+    }
+    let q = quizEducation[index];
+    quizArea.innerHTML = `
+      <div style="text-align:left; margin-bottom:15px;"><strong>Pergunta:</strong> ${q.question}</div>
+      <input type="text" id="userAnswer" placeholder="Digite sua resposta aqui" style="width:100%; padding:8px; font-size:1rem;"/>
+      <button onclick="checkAnswer()">Enviar</button>
+      <div id="feedback" style="margin-top:10px;"></div>
     `;
+    document.getElementById('userAnswer').focus();
+  }
 
-    const btn = document.getElementById('colorBtn');
-    const scoreText = document.getElementById('colorScore');
-    let clicks = 0;
-    let colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
-    let interval = setInterval(changeColor, 1000);
+  window.checkAnswer = function() {
+    let userAns = document.getElementById('userAnswer').value.trim().toLowerCase();
+    let correctAns = quizEducation[index].answer.toLowerCase();
 
-    btn.onclick = () => {
-      clicks++;
-      scoreText.textContent = 'Cliques: ' + clicks;
-    };
-
-    function changeColor() {
-      let newColor = colors[Math.floor(Math.random() * colors.length)];
-      btn.style.backgroundColor = newColor;
+    let fb = document.getElementById('feedback');
+    if(userAns === correctAns) {
+      fb.textContent = 'Resposta correta! 🎉';
+      fb.style.color = 'green';
+      score++;
+      alimentarMascote(2, "Amo ver você aprendendo!");
+    } else {
+      fb.textContent = `Resposta incorreta. A correta era: "${quizEducation[index].answer}".`;
+      fb.style.color = 'red';
     }
+    index++;
+    setTimeout(showNext, 1500);
+  };
 
-    // Para o jogo após 20 segundos
-    setTimeout(() => {
-      clearInterval(interval);
-      btn.disabled = true;
-      mascoteText.textContent = `Jogo finalizado! Você clicou ${clicks} vezes.`;
-    }, 20000);
+  showNext();
+}
+
+// Dicas para TDAH e Autismo
+function showTips() {
+  tipsArea.classList.remove('hidden');
+  gameArea.innerHTML = '';
+  quizArea.classList.add('hidden');
+  factsArea.classList.add('hidden');
+  quizDiv.classList.add('hidden');
+  menuButtons.classList.add('hidden');
+  resultDiv.innerHTML = '';
+  mascoteText.textContent = 'Aqui estão algumas dicas que podem ajudar no dia a dia!';
+  tipsArea.innerHTML = `
+    <h3>Dicas para TDAH</h3>
+    <ul style="text-align:left;">
+      <li>Estabeleça uma rotina diária com horários definidos.</li>
+      <li>Use lembretes visuais e alarmes para ajudar na organização.</li>
+      <li>Faça pausas curtas durante tarefas longas para melhorar o foco.</li>
+    </ul>
+    <h3>Dicas para Autismo</h3>
+    <ul style="text-align:left;">
+      <li>Crie um ambiente calmo e previsível para reduzir estresse.</li>
+      <li>Use linguagem clara e direta para facilitar a comunicação.</li>
+      <li>Incentive atividades que respeitem os interesses da pessoa.</li>
+    </ul>
+    <button onclick="goToMenu()">Voltar ao Menu</button>
+  `;
+}
+
+// Fatos curiosos sobre TDAH e Autismo
+function showFacts() {
+  factsArea.classList.remove('hidden');
+  tipsArea.classList.add('hidden');
+  gameArea.innerHTML = '';
+  quizArea.classList.add('hidden');
+  quizDiv.classList.add('hidden');
+  menuButtons.classList.add('hidden');
+  resultDiv.innerHTML = '';
+  mascoteText.textContent = 'Aqui estão fatos curiosos sobre TDAH e Autismo com suas fundamentações:';
+
+  let html = '<h3>Fatos Curiosos</h3>';
+  factsCuriosos.forEach(fact => {
+    html += `<h4>${fact.title}</h4><p>${fact.text}</p>`;
+  });
+  html += `<button onclick="goToMenu()">Voltar ao Menu</button>`;
+  factsArea.innerHTML = html;
+}
+
+// Função para iniciar jogos via menu
+function startGame(type) {
+  quizArea.classList.add('hidden');
+  tipsArea.classList.add('hidden');
+  factsArea.classList.add('hidden');
+  resultDiv.innerHTML = '';
+  menuButtons.classList.add('hidden');
+  quizDiv.classList.add('hidden');
+  mascoteText.textContent = 'Divirta-se!';
+
+  switch(type) {
+    case 'attention': startAttentionGame(); break;
+    case 'memory': startMemoryGame(); break;
+    case 'sequence': startSequenceGame(); break;
+    case 'colorReaction': startColorReactionGame(); break;
   }
+}
 
-  // Quiz educativo sobre TDAH e Autismo
-  function showQuiz() {
-    quizArea.classList.remove('hidden');
-    gameArea.innerHTML = '';
-    tipsArea.classList.add('hidden');
-    factsArea.classList.add('hidden');
-    quizDiv.classList.add('hidden');
-    menuButtons.classList.add('hidden');
-    resultDiv.innerHTML = '';
+function restartApp() {
+  resultDiv.innerHTML = '';
+  menuButtons.classList.add('hidden');
+  quizArea.classList.add('hidden');
+  tipsArea.classList.add('hidden');
+  factsArea.classList.add('hidden');
+  gameArea.innerHTML = '';
+  quizDiv.classList.remove('hidden');
+  inTdahPhase = true;
+  tdahScore = 0;
+  autismScore = 0;
+  currentTdahQIndex = 0;
+  currentAutismQIndex = 0;
+  mascoteText.textContent = 'Vamos começar pela avaliação para conhecer seu perfil!';
+  showTdahQuestion();
+}
 
-    let index = 0;
-    let score = 0;
-
-    function showNext() {
-      if(index >= quizEducation.length) {
-        quizArea.innerHTML = `<h3>Você acertou ${score} de ${quizEducation.length} perguntas!</h3>
-          <button onclick="goToMenu()">Voltar ao Menu</button>`;
-        mascoteText.textContent = 'Espero que você tenha aprendido bastante! 📚';
-        return;
-      }
-      let q = quizEducation[index];
-      quizArea.innerHTML = `
-        <div style="text-align:left; margin-bottom:15px;"><strong>Pergunta:</strong> ${q.question}</div>
-        <input type="text" id="userAnswer" placeholder="Digite sua resposta aqui" style="width:100%; padding:8px; font-size:1rem;"/>
-        <button onclick="checkAnswer()">Enviar</button>
-        <div id="feedback" style="margin-top:10px;"></div>
-      `;
-      document.getElementById('userAnswer').focus();
-    }
-
-    window.checkAnswer = function() {
-      let userAns = document.getElementById('userAnswer').value.trim().toLowerCase();
-      let correctAns = quizEducation[index].answer.toLowerCase();
-
-      let fb = document.getElementById('feedback');
-      if(userAns === correctAns) {
-        fb.textContent = 'Resposta correta! 🎉';
-        fb.style.color = 'green';
-        score++;
-      } else {
-        fb.textContent = `Resposta incorreta. A correta era: "${quizEducation[index].answer}".`;
-        fb.style.color = 'red';
-      }
-      index++;
-      setTimeout(showNext, 1800);
-    };
-
-    showNext();
-  }
-
-  // Dicas para TDAH e Autismo
-  function showTips() {
-    tipsArea.classList.remove('hidden');
-    gameArea.innerHTML = '';
-    quizArea.classList.add('hidden');
-    factsArea.classList.add('hidden');
-    quizDiv.classList.add('hidden');
-    menuButtons.classList.add('hidden');
-    resultDiv.innerHTML = '';
-    mascoteText.textContent = 'Aqui estão algumas dicas que podem ajudar no dia a dia!';
-
-    tipsArea.innerHTML = `
-      <h3>Dicas para TDAH</h3>
-      <ul style="text-align:left;">
-        <li>Estabeleça uma rotina diária com horários definidos.</li>
-        <li>Use lembretes visuais e alarmes para ajudar na organização.</li>
-        <li>Faça pausas curtas durante tarefas longas para melhorar o foco.</li>
-      </ul>
-      <h3>Dicas para Autismo</h3>
-      <ul style="text-align:left;">
-        <li>Crie um ambiente calmo e previsível para reduzir estresse.</li>
-        <li>Use linguagem clara e direta para facilitar a comunicação.</li>
-        <li>Incentive atividades que respeitem os interesses da pessoa.</li>
-      </ul>
-      <button onclick="goToMenu()">Voltar ao Menu</button>
-    `;
-  }
-
-  // Fatos curiosos sobre TDAH e Autismo
-  function showFacts() {
-    factsArea.classList.remove('hidden');
-    tipsArea.classList.add('hidden');
-    gameArea.innerHTML = '';
-    quizArea.classList.add('hidden');
-    quizDiv.classList.add('hidden');
-    menuButtons.classList.add('hidden');
-    resultDiv.innerHTML = '';
-    mascoteText.textContent = 'Aqui estão fatos curiosos sobre TDAH e Autismo com suas fundamentações:';
-
-    let html = '<h3>Fatos Curiosos</h3>';
-    factsCuriosos.forEach(fact => {
-      html += `<h4>${fact.title}</h4><p>${fact.text}</p>`;
-    });
-    html += `<button onclick="goToMenu()">Voltar ao Menu</button>`;
-    factsArea.innerHTML = html;
-  }
-
-  // Função para iniciar jogos via menu
-  function startGame(type) {
-    quizArea.classList.add('hidden');
-    tipsArea.classList.add('hidden');
-    factsArea.classList.add('hidden');
-    resultDiv.innerHTML = '';
-    menuButtons.classList.add('hidden');
-    quizDiv.classList.add('hidden');
-    mascoteText.textContent = 'Divirta-se!';
-
-    switch(type) {
-      case 'attention': startAttentionGame(); break;
-      case 'memory': startMemoryGame(); break;
-      case 'sequence': startSequenceGame(); break;
-      case 'colorReaction': startColorReactionGame(); break;
-    }
-  }
-
-  function restartApp() {
-    resultDiv.innerHTML = '';
-    menuButtons.classList.add('hidden');
-    quizArea.classList.add('hidden');
-    tipsArea.classList.add('hidden');
-    factsArea.classList.add('hidden');
-    gameArea.innerHTML = '';
-    quizDiv.classList.remove('hidden');
-    inTdahPhase = true;
-    tdahScore = 0;
-    autismScore = 0;
-    currentTdahQIndex = 0;
-    currentAutismQIndex = 0;
-    mascoteText.textContent = 'Vamos começar pela avaliação para conhecer seu perfil!';
-    showTdahQuestion();
-  }
-
-  // Inicia avaliação quando carrega
-  startEvaluation();
+// Inicia avaliação ao carregar a página
+startEvaluation();
 
 </script>
 </body>
 </html>
-
-
