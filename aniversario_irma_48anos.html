@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz 48 Anos! ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #E8D4F1;
+    --secondary: #F5F0E8;
+    --accent: #D4AF37;
+    --text: #2C2C2C;
+    --background: #FAFAF8;
+    --light-text: #666666;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    overflow: hidden;
+}
+
+/* CONTAINER DE PÁGINAS */
+.pages-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.page.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* PÁGINA 1 - BEM-VINDA */
+.page-welcome {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    text-align: center;
+}
+
+.welcome-content h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: var(--text);
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.welcome-content .sister-name {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 30px;
+    font-weight: 300;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.welcome-content .subtitle {
+    font-size: 1.3rem;
+    color: var(--light-text);
+    margin-bottom: 50px;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.btn-enter {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    background-color: var(--accent);
+    color: var(--text);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.btn-enter:hover {
+    background-color: #E8C547;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* PÁGINA 2 - MENSAGEM ESPECIAL */
+.page-message {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--background) 100%);
+}
+
+.message-container {
+    max-width: 700px;
+    width: 100%;
+    background: white;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.8s ease-out;
+}
+
+.message-container h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.message-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--light-text);
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+/* PÁGINA 3 - MURAL DE DESEJOS */
+.page-wishes {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+.wishes-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: var(--text);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.wishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+}
+
+.wish-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent);
+    animation: fadeIn 0.8s ease-out;
+}
+
+.wish-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.wish-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--light-text);
+    text-align: center;
+}
+
+/* PÁGINA 4 - SURPRESA FINAL */
+.page-final {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+    text-align: center;
+}
+
+.final-container {
+    max-width: 600px;
+    animation: slideUp 0.8s ease-out;
+}
+
+.final-container h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: var(--text);
+    margin-bottom: 30px;
+}
+
+.final-dedication {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+}
+
+.final-dedication p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--light-text);
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+}
+
+.final-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    padding: 12px 30px;
+    font-size: 1rem;
+    background-color: white;
+    color: var(--text);
+    border: 2px solid var(--text);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-action:hover {
+    background-color: var(--text);
+    color: white;
+}
+
+/* NAVEGAÇÃO */
+.nav-dots {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(212, 175, 55, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent);
+}
+
+.dot.active {
+    background-color: var(--accent);
+    transform: scale(1.3);
+}
+
+.nav-buttons {
+    position: fixed;
+    bottom: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 100;
+}
+
+.btn-nav {
+    padding: 10px 25px;
+    background-color: var(--accent);
+    color: var(--text);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.btn-nav:hover {
+    background-color: #E8C547;
+    transform: translateY(-2px);
+}
+
+.btn-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* CONFETES */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent);
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .welcome-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .welcome-content .sister-name {
+        font-size: 1.5rem;
+    }
+
+    .wishes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .message-container {
+        padding: 30px;
+    }
+
+    .nav-buttons {
+        bottom: 70px;
+        padding: 0 15px;
+    }
+
+    .btn-nav {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .final-dedication {
+        padding: 25px;
+    }
+
+    .final-container h2 {
+        font-size: 2rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="pages-container">
+        <!-- PÁGINA 1: BEM-VINDA -->
+        <div class="page page-welcome active">
+            <div class="welcome-content">
+                <h1>Feliz 48 Anos! 🎉</h1>
+                <div class="sister-name">[Nome da Irmã]</div>
+                <div class="subtitle">Um dia especial para uma pessoa especial</div>
+                <button class="btn-enter" onclick="goToPage(1)">Continuar →</button>
+            </div>
+        </div>
+
+        <!-- PÁGINA 2: MENSAGEM ESPECIAL -->
+        <div class="page page-message">
+            <div class="message-container">
+                <h2>Mensagem Especial</h2>
+                <div class="message-text">Querida [Nome da Irmã],
+
+Neste dia especial em que você completa 48 anos, queria expressar o quanto você significa para mim. Ao longo de todos esses anos, você provou ser não só minha irmã, mas uma amiga leal e um exemplo de força.
+
+Sua sabedoria, seu carinho e sua capacidade de amar incondicionalmente tocam as vidas de todos ao seu redor. Você merece celebrar este dia cercada de toda alegria e reconhecimento que merece.
+
+Que o próximo ano seja repleto de saúde, paz, novas descobertas e momentos felizes ao lado das pessoas que ama.
+
+Com todo meu carinho e admiração,
+Sempre ao seu lado. 💝</div>
+            </div>
+        </div>
+
+        <!-- PÁGINA 3: MURAL DE DESEJOS -->
+        <div class="page page-wishes">
+            <h2 class="wishes-title">Desejos de Aniversário</h2>
+            <div class="wishes-grid">
+                <div class="wish-card">
+                    <p>Aos 48 anos, você carrega consigo a sabedoria de uma vida bem vivida.</p>
+                </div>
+                <div class="wish-card">
+                    <p>Obrigado por ser sempre uma inspiração de força e beleza.</p>
+                </div>
+                <div class="wish-card">
+                    <p>Que este ano traga saúde, alegria e realização de sonhos.</p>
+                </div>
+                <div class="wish-card">
+                    <p>Você merece toda a felicidade do mundo neste dia especial.</p>
+                </div>
+                <div class="wish-card">
+                    <p>48 anos de histórias incríveis, e muitas mais por vir!</p>
+                </div>
+                <div class="wish-card">
+                    <p>Sua generosidade e carinho tocam o coração de todos.</p>
+                </div>
+                <div class="wish-card">
+                    <p>Que o tempo continue trazendo mais graça e satisfação.</p>
+                </div>
+                <div class="wish-card">
+                    <p>Celebramos não só seu dia, mas a pessoa incrível que você é.</p>
+                </div>
+                <div class="wish-card">
+                    <p>Aos 48, você brilha mais que nunca.</p>
+                </div>
+                <div class="wish-card">
+                    <p>Gratidão por todos os momentos que compartilhamos com você.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA 4: SURPRESA FINAL -->
+        <div class="page page-final">
+            <div class="final-container">
+                <h2>48 Anos de Vida Extraordinária</h2>
+                <div class="final-dedication">
+                    <p>Você não é apenas um ano mais velho hoje.</p>
+                    <p>Você é um ano mais sábio, mais bela e mais admirada.</p>
+                    <p style="margin-top: 20px; font-weight: 600;">Obrigado por ser exatamente quem você é.</p>
+                    <p style="margin-top: 30px; font-size: 1.3rem; color: var(--accent);">Feliz Aniversário! 🎉</p>
+                </div>
+                <div class="final-buttons">
+                    <button class="btn-action" onclick="shareMessage()">Compartilhar</button>
+                    <button class="btn-action" onclick="printPage()">Imprimir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVEGAÇÃO -->
+    <div class="nav-dots">
+        <div class="dot active" onclick="goToPage(0)"></div>
+        <div class="dot" onclick="goToPage(1)"></div>
+        <div class="dot" onclick="goToPage(2)"></div>
+        <div class="dot" onclick="goToPage(3)"></div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn-nav" onclick="previousPage()" id="btnPrev">← Anterior</button>
+        <button class="btn-nav" onclick="nextPage()" id="btnNext">Próximo →</button>
+    </div>
+
+    <script>
+let currentPage = 0;
+const totalPages = 4;
+
+function goToPage(page) {
+    if (page < 0 || page >= totalPages) return;
+
+    // Remove active de todas as páginas
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+
+    // Adiciona active à página selecionada
+    document.querySelectorAll('.page')[page].classList.add('active');
+    document.querySelectorAll('.dot')[page].classList.add('active');
+
+    currentPage = page;
+
+    // Atualiza botões de navegação
+    document.getElementById('btnPrev').disabled = page === 0;
+    document.getElementById('btnNext').disabled = page === totalPages - 1;
+
+    // Se for primeira página, toca confetes
+    if (page === 0) {
+        createConfetti();
+    }
+}
+
+function nextPage() {
+    if (currentPage < totalPages - 1) {
+        goToPage(currentPage + 1);
+    }
+}
+
+function previousPage() {
+    if (currentPage > 0) {
+        goToPage(currentPage - 1);
+    }
+}
+
+function createConfetti() {
+    const confettiCount = 30;
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.top = '-10px';
+        document.body.appendChild(confetti);
+
+        const duration = 2 + Math.random() * 1;
+        const xMove = (Math.random() - 0.5) * 200;
+
+        confetti.animate([
+            { transform: 'translateY(0) translateX(0)', opacity: 1 },
+            { transform: `translateY(${window.innerHeight}px) translateX(${xMove}px)`, opacity: 0 }
+        ], {
+            duration: duration * 1000,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        });
+
+        setTimeout(() => confetti.remove(), duration * 1000);
+    }
+}
+
+function shareMessage() {
+    const text = "Venha celebrar comigo! Acesse esse presente especial de aniversário.";
+    const url = window.location.href;
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'Feliz 48 Anos!',
+            text: text,
+            url: url
+        });
+    } else {
+        alert('Copie este link para compartilhar:\n' + url);
+    }
+}
+
+function printPage() {
+    window.print();
+}
+
+// Inicializa
+document.getElementById('btnPrev').disabled = true;
+createConfetti();
+    </script>
+</body>
+</html>
